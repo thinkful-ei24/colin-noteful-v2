@@ -15,4 +15,16 @@ router.get('/', (req, res, next) => {
     .catch(err => next(err));
 });
 
+router.get('/:id', (req, res, next) => {
+  const id = req.params.id;
+  knex('folders')
+    .select()
+    .where({id: `${id}`})
+    .then(response => {
+      res.status(200).json(response[0])
+    })
+    .catch(err => next(err));
+});
+
+
 module.exports = router;
